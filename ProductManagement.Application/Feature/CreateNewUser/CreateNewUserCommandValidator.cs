@@ -1,4 +1,3 @@
-using System;
 using FluentValidation;
 
 namespace ProductManagement.Application.Feature.CreateNewUser;

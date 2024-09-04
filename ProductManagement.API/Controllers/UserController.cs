@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.Feature.CreateNewUser;
 using ProductManagement.Application.Feature.GetAllUser;
+using ProductManagement.Application.Feature.Register;
 using ProductManagement.Domain.IRepositories;
 
 namespace ProductManagement.API.Controllers
@@ -40,5 +41,17 @@ namespace ProductManagement.API.Controllers
             }
             return BadRequest(result.Errors);
         }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterCommand request)
+        {
+            var result = await _sender.Send(request);
+            if(result.IsSuccess)
+            {
+                return Ok("User registered successfully");
+            }
+            return BadRequest(result.Errors);
+        }
+
     }
 }
