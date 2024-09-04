@@ -58,7 +58,7 @@ public class ProductManagementDbContext : DbContext
 
             entity.Property(n => n.Password)
                 .IsRequired()
-                .HasColumnType("varchar(10)");
+                .HasColumnType("varchar(64)");
 
         });
         #endregion

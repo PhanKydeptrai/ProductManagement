@@ -9,16 +9,19 @@ namespace ProductManagement.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        
         private readonly ISender _sender;
-        public UserController(IUserRepository userRepository, ISender sender)
+        public UserController(ISender sender)
         {
-            _userRepository = userRepository;
             _sender = sender;
         }
 
+
+
+        
+
         [HttpPost]
-        public async Task<IActionResult> User(CreateNewUserCommand request)
+        public async Task<IActionResult> AddNewUser(CreateNewUserCommand request)
         {
             var result = await _sender.Send(request);
             if(result.IsSuccess)

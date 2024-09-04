@@ -7,11 +7,7 @@ public class CreateNewUserCommandValidator : AbstractValidator<CreateNewUserComm
 {
     public CreateNewUserCommandValidator()
     {
-        RuleFor(a => a.Password)
-            .NotEmpty()
-            .WithMessage("Password is required")
-            .MinimumLength(3).WithMessage("Password must be at least 3 characters");
-
+    
         RuleFor(a => a.UserName)
             .NotEmpty()
             .WithMessage("UserName is required");
@@ -25,6 +21,6 @@ public class CreateNewUserCommandValidator : AbstractValidator<CreateNewUserComm
         RuleFor(a => a.Role)
             .NotEmpty()
             .WithMessage("Role is required")
-            .Must(a => a == "Admin" || a == "User");
+            .Must(a => a == "Admin" || a == "User").WithMessage("Role must be Admin or User");
     }
 }

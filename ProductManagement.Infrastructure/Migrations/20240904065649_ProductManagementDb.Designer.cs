@@ -12,7 +12,7 @@ using ProductManagement.Infrastructure;
 namespace ProductManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductManagementDbContext))]
-    [Migration("20240903141127_ProductManagementDb")]
+    [Migration("20240904065649_ProductManagementDb")]
     partial class ProductManagementDb
     {
         /// <inheritdoc />
@@ -71,7 +71,7 @@ namespace ProductManagement.Infrastructure.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(64)");
 
                     b.Property<string>("Role")
                         .IsRequired()

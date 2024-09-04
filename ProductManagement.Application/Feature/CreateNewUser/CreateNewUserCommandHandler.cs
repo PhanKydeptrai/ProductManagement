@@ -52,7 +52,7 @@ public class CreateNewUserCommandHandler : IRequestHandler<CreateNewUserCommand,
             UserId = Guid.NewGuid(),
             UserName = request.UserName,
             UserMail = request.UserMail,
-            Password = EncryptProvider.Base64Encrypt("123"), //Default password
+            Password = EncryptProvider.Sha256("123"), //Default password
             Role = request.Role
         };
 

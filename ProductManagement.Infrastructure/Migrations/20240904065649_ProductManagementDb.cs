@@ -30,7 +30,7 @@ namespace ProductManagement.Infrastructure.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     UserMail = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    Password = table.Column<string>(type: "varchar(10)", nullable: false),
+                    Password = table.Column<string>(type: "varchar(64)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

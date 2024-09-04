@@ -68,7 +68,7 @@ namespace ProductManagement.Infrastructure.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(64)");
 
                     b.Property<string>("Role")
                         .IsRequired()
