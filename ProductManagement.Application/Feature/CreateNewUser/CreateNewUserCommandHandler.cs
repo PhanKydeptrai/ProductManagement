@@ -60,7 +60,7 @@ public class CreateNewUserCommandHandler : IRequestHandler<CreateNewUserCommand,
         await _unitOfWork.SaveChangesAsync();
         result.Value = true;
         result.IsSuccess = true;
-        
+
 
         return result;
     }

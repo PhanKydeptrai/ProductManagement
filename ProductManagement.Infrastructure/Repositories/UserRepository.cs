@@ -22,6 +22,11 @@ public class UserRepository : IUserRepository
         _context.Users.Remove(user);
     }
 
+    public async Task<List<User>> GetAllUsers()
+    {
+        return await _context.Users.ToListAsync();
+    }
+
     public async Task<User?> GetUserByEmail(string email)
     {
         return await _context.Users.SingleAsync(u => u.UserMail == email);
