@@ -38,14 +38,6 @@ public class CreateNewUserCommandHandler : IRequestHandler<CreateNewUserCommand,
             return result;
         }  
 
-        //Check if email already exist
-        var isEmailExist = await _userRepository.IsEmailExist(request.UserMail);
-        if(isEmailExist)
-        {
-            result.Errors.Add("Email already exist");
-            return result;
-        }
-
         //Create new user 
         var user = new User
         {

@@ -10,6 +10,6 @@ public interface IUserRepository
     Task<List<User>> GetAllUsers();
     Task<User?> GetUserById(Guid id);
     Task<User?> GetUserByEmail(string email);
-    Task<bool> IsEmailExist(string email);
+    bool IsEmailExist(string email);
 
 }
