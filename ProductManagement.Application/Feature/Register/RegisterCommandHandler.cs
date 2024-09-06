@@ -26,7 +26,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<bo
             Errors = new List<string>()
         };
         //Validate
-        RegisterCommandValidator validator = new RegisterCommandValidator();
+        RegisterCommandValidator validator = new RegisterCommandValidator(_userRepository);
         ValidationResult validationResult = validator.Validate(request);
         if (!validationResult.IsValid)
         {
@@ -34,13 +34,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<bo
             {
                 result.Errors.Add(error.ErrorMessage);
             }
-            return result;
-        }
-        //Check if email already exist
-        bool isEmailExist = await _userRepository.IsEmailExist(request.Email);
-        if (isEmailExist)
-        {
-            result.Errors.Add("Email already exist");
             return result;
         }
         
