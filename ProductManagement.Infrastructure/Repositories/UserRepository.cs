@@ -37,6 +37,12 @@ public class UserRepository : IUserRepository
         return await _context.Users.FindAsync(id);
     }
 
+    public async Task<IQueryable<User>> GetQueryAbleOfUser()
+    {
+        IQueryable<User> query = _context.Users;
+        return query;
+    }
+
     public bool IsEmailExist(string email)
     {
         var check = _context.Users.Any(u => u.UserMail == email);
