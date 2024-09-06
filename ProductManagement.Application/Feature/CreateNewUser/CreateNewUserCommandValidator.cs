@@ -1,10 +1,11 @@
 using FluentValidation;
+using ProductManagement.Domain.IRepositories;
 
 namespace ProductManagement.Application.Feature.CreateNewUser;
 
 public class CreateNewUserCommandValidator : AbstractValidator<CreateNewUserCommand>
 {
-    public CreateNewUserCommandValidator()
+    public CreateNewUserCommandValidator(IUserRepository userRepository)
     {
     
         RuleFor(a => a.UserName)
@@ -15,7 +16,9 @@ public class CreateNewUserCommandValidator : AbstractValidator<CreateNewUserComm
             .NotEmpty()
             .WithMessage("UserMail is required")
             .EmailAddress()
-            .WithMessage("UserMail is not a valid email address");
+            .WithMessage("UserMail is not a valid email address")
+            .Must(a => userRepository.IsEmailExist(a) == false)
+            .WithMessage("UserMail is already exist");
 
         RuleFor(a => a.Role)
             .NotEmpty()
