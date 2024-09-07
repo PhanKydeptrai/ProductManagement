@@ -11,5 +11,6 @@ public interface IUserRepository
     Task<User?> GetUserById(Guid id);
     Task<User?> GetUserByEmail(string email);
     bool IsEmailExist(string email);
-
+    Task<IQueryable<User>> GetQueryAbleOfUser();
+    Task<bool> CheckPasswordAsync(string password);
 }
