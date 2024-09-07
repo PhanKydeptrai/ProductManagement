@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.Feature.CreateNewUser;
 using ProductManagement.Application.Feature.GetAllUser;
 using ProductManagement.Application.Feature.GetUserByName;
+using ProductManagement.Application.Feature.Login;
 using ProductManagement.Application.Feature.Register;
 using ProductManagement.Domain.IRepositories;
 
@@ -12,14 +13,11 @@ namespace ProductManagement.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        
         private readonly ISender _sender;
         public UserController(ISender sender)
         {
             _sender = sender;
         }
-
-
         [HttpGet]
         public async Task<IActionResult> Users()
         {
@@ -68,5 +66,15 @@ namespace ProductManagement.API.Controllers
 
         }
 
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginCommand request)
+        {
+            var result = await _sender.Send(request);
+            if(result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return BadRequest("Login failed");
+        }
     }
 }

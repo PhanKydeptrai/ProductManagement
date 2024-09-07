@@ -53,4 +53,9 @@ public class UserRepository : IUserRepository
     {
         _context.Users.Update(user);
     }
+
+    public async Task<bool> CheckPasswordAsync(string password)
+    {
+        return await _context.Users.AnyAsync(u => u.Password == password);
+    }
 }
