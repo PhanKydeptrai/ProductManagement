@@ -11,7 +11,7 @@ public class GetUserByNameQueryHanler : IRequestHandler<GetUserByNameQuery, Resu
     {
         _userRepository = userRepository;
     }
-    public Task<Result<List<User>>> Handle(GetUserByNameQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<User>>> Handle(GetUserByNameQuery request, CancellationToken cancellationToken)
     {
         Result<List<User>> result = new Result<List<User>>
         {
@@ -20,9 +20,12 @@ public class GetUserByNameQueryHanler : IRequestHandler<GetUserByNameQuery, Resu
             Errors = new List<string>()
         };
 
-        //Tạm thời không làm gì hết, đi ngủ
-        return Task.FromResult(result);
 
+        IQueryable query = await _userRepository.GetQueryAbleOfUser();
+        result.Value = query.Cast<User>().Where(a => a.UserName.Contains(request.UserName)).ToList();
+        result.IsSuccess = true;
+
+        return result;
     }
 }
 

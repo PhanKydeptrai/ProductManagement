@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.Feature.CreateNewUser;
 using ProductManagement.Application.Feature.GetAllUser;
+using ProductManagement.Application.Feature.GetUserByName;
 using ProductManagement.Application.Feature.Register;
 using ProductManagement.Domain.IRepositories;
 
@@ -51,6 +52,23 @@ namespace ProductManagement.API.Controllers
                 return Ok("User registered successfully");
             }
             return BadRequest(result.Errors);
+        }
+
+        //Api dùng để tìm kiếm user theo tên
+        [HttpGet("Search")]
+        public async Task<IActionResult> SeachUser([FromQuery]string? searchString)
+        {
+            GetUserByNameQuery request = new GetUserByNameQuery
+            {
+                UserName = searchString
+            };
+
+            var result = await _sender.Send(request);
+            if(result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+            return NotFound("No user found");
         }
 
     }
