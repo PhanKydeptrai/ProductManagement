@@ -64,11 +64,8 @@ namespace ProductManagement.API.Controllers
             };
 
             var result = await _sender.Send(request);
-            if(result.IsSuccess)
-            {
-                return Ok(result.Value);
-            }
-            return NotFound("No user found");
+            return Ok(result.Value);
+
         }
 
     }

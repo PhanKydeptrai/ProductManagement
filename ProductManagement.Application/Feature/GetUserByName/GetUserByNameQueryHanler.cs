@@ -15,15 +15,19 @@ public class GetUserByNameQueryHanler : IRequestHandler<GetUserByNameQuery, Resu
     {
         Result<List<User>> result = new Result<List<User>>
         {
-            IsSuccess = false,
+            IsSuccess = true,
             Value = new List<User>(),
             Errors = new List<string>()
         };
 
+        IQueryable userQuery = await _userRepository.GetQueryAbleOfUser();
 
-        IQueryable query = await _userRepository.GetQueryAbleOfUser();
-        result.Value = query.Cast<User>().Where(a => a.UserName.Contains(request.UserName)).ToList();
-        result.IsSuccess = true;
+        if(!string.IsNullOrWhiteSpace(request.UserName))
+        {
+            userQuery = userQuery.Cast<User>().Where(a => a.UserName.Contains(request.UserName));
+        }
+
+        result.Value = userQuery.Cast<User>().ToList();
 
         return result;
     }
