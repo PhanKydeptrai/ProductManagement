@@ -54,8 +54,9 @@ public class UserRepository : IUserRepository
         _context.Users.Update(user);
     }
 
-    public async Task<bool> CheckPasswordAsync(string password)
+    public async Task<User> UserAuthenticate(string email, string password)
     {
-        return await _context.Users.AnyAsync(u => u.Password == password);
+        User? user = await _context.Users.FirstOrDefaultAsync(u => u.UserMail == email && u.Password == password);
+        return user;
     }
 }

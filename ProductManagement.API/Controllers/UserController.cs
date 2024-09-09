@@ -72,6 +72,7 @@ namespace ProductManagement.API.Controllers
             var result = await _sender.Send(request);
             if(result.IsSuccess)
             {
+                //Return token
                 return Ok(result.Value);
             }
             return BadRequest("Login failed");
