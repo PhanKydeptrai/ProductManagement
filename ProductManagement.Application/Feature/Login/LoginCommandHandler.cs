@@ -8,10 +8,13 @@ namespace ProductManagement.Application.Feature.Login;
 public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<string>>
 {
     private readonly IUserRepository _userRepository;
-    public LoginCommandHandler(IUserRepository userRepository)
+    private readonly IJwtProvider _jwtProvider;
+    public LoginCommandHandler(IUserRepository userRepository, IJwtProvider jwtProvider)
     {
         _userRepository = userRepository;
+        _jwtProvider = jwtProvider;
     }
+    
     public async Task<Result<string>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         Result<string> result = new Result<string>
@@ -21,13 +24,17 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<string>>
             Errors = new List<string>()
         };
         
-        if(_userRepository.IsEmailExist(request.Email) && await _userRepository.CheckPasswordAsync(EncryptProvider.Sha256(request.Password)))
+
+        //Get user
+        var user = await _userRepository.UserAuthenticate(request.Email, EncryptProvider.Sha256(request.Password));
+
+        if(user != null)
         {
             result.IsSuccess = true;
             //return token
-            result.Value = "Day la token";
+            result.Value = _jwtProvider.Generrate(user);
         }
-        return result;
+        return result; 
 
     }
 }
