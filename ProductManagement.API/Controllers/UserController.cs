@@ -1,11 +1,11 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.Feature.CreateNewUser;
 using ProductManagement.Application.Feature.GetAllUser;
 using ProductManagement.Application.Feature.GetUserByName;
 using ProductManagement.Application.Feature.Login;
 using ProductManagement.Application.Feature.Register;
-using ProductManagement.Domain.IRepositories;
 
 namespace ProductManagement.API.Controllers
 {
@@ -18,6 +18,8 @@ namespace ProductManagement.API.Controllers
         {
             _sender = sender;
         }
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Users()
         {

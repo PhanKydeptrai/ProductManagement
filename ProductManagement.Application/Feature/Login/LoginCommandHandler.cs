@@ -32,7 +32,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<string>>
         {
             result.IsSuccess = true;
             //return token
-            result.Value = _jwtProvider.Generrate(user);
+            result.Value = _jwtProvider.GenerateJwtToken(user);
         }
         return result; 
 
