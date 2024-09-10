@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ProductManagement.API.Authentication;
 using ProductManagement.Application;
-using ProductManagement.Domain.IRepositories;
 using ProductManagement.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +12,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 // Add infrastructure services to get connection string
 builder.Services.AddInfrastructureExtentions(builder.Configuration)
                 .AddInfrastructure()

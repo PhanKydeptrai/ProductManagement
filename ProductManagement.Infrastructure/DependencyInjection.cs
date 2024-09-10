@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using ProductManagement.Domain.IRepositories;
+using ProductManagement.Infrastructure.Authentication;
 using ProductManagement.Infrastructure.Repositories;
 namespace ProductManagement.Infrastructure;
 
@@ -10,7 +11,7 @@ public static class DependencyInjection
         // Đăng ký dependencyinjection ở đây
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        //services.AddScoped<IJwtProvider, JwtProvider>();
+        services.AddScoped<IJwtProvider, JwtProvider>();
         return services;
     }
 

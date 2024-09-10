@@ -1,12 +1,12 @@
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProductManagement.Domain.Entities;
 using ProductManagement.Domain.IRepositories;
 
-namespace ProductManagement.API.Authentication;
+namespace ProductManagement.Infrastructure.Authentication;
 
 public class JwtProvider : IJwtProvider
 {
@@ -41,4 +41,5 @@ public class JwtProvider : IJwtProvider
 
         return tokenHandler.WriteToken(token);
     }
+
 }
