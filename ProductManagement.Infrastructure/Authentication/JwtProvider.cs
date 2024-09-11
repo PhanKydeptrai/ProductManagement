@@ -28,7 +28,7 @@ public class JwtProvider : IJwtProvider
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddSeconds(30),
+            Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = credentials,
             Issuer = _config["JWT:Issuer"],
             Audience = _config["JWT:Audience"]
