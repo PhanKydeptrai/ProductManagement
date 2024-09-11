@@ -25,7 +25,6 @@ public class CreateNewUserCommandHandler : IRequestHandler<CreateNewUserCommand,
             IsSuccess = false,
             Errors = new List<string>(),    
         };
-
         //Validate
         CreateNewUserCommandValidator validator = new CreateNewUserCommandValidator(_userRepository);
         ValidationResult validationResult = validator.Validate(request);
