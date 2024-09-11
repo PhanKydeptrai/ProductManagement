@@ -4,5 +4,5 @@ namespace ProductManagement.Domain.IRepositories;
 
 public interface IJwtProvider
 {
-    string Generrate(User user);
+    string GenerateJwtToken(User user);
 }
